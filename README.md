@@ -1,8 +1,9 @@
 # AdNabu Challenge
 
-## Getting Started
+This project is done as part of AdNabu challenge. This Provides an API to download
+contents of provided urls and send it to a given email id.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+## Getting Started
 
 ### Prerequisites
 
