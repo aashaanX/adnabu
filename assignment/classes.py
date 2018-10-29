@@ -17,11 +17,6 @@ class UrlExtractor:
             re.install_opener(opener)
             re.urlretrieve(url, "adnabu_dow/{}.html".
                            format(str(request_id)+"/"+name))
-            # response = urllib.requesturlopen(url)
-            # web_content = response.read()
-
-            # with open("adnabu_dow/{}".format(str(request_id)+"/"+name), 'w') as file:
-            #     file.write(web_content)
             return True
         except Exception as e:
             print(e)
