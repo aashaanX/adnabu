@@ -5,6 +5,7 @@ from assignment.classes import UrlExtractor
 
 
 class URequest(models.Model):
+    """Object to store request"""
     email_id = models.EmailField()
     email_status = models.BooleanField(default=False)
 
@@ -12,6 +13,7 @@ class URequest(models.Model):
         return str(self.id) + str(self.email_id)
 
     def add_urls(self, urls):
+        """Adding urls and relating to request"""
         for url in urls:
             uurl = UUrl()
             uurl.url = url
@@ -19,6 +21,7 @@ class URequest(models.Model):
             uurl.save()
 
     def extract_contents(self):
+        """Extracting the content of the url and sending mail"""
         urls = UUrl.objects.filter(urequest=self).values_list('url')
         urls = [url[0] for url in urls]
         uextractor = UrlExtractor()
@@ -26,13 +29,15 @@ class URequest(models.Model):
         UUrl.objects.filter(urequest=self, url__in=status).update(status=True)
         extracted_urls = UUrl.objects.filter(urequest=self).values_list('url', 'status')
         body = [(x[0], "Sucess" if x[1] else "Unsucessful") for x in extracted_urls]
-        uextractor.send_mail_adnabu(self.email_id, "adnabu_dow/adnabu_{}.zip".format(self.id), str(body))
+        uextractor.send_mail_adnabu(self.email_id, "adnabu_dow/adnabu_{}.zip".
+                                    format(self.id), str(body))
         self.email_status = True
         self.save()
 
 
 
 class UUrl(models.Model):
+    """Object to store urls"""
     url = models.CharField(max_length=1024)
     urequest = models.ForeignKey(URequest)
     status = models.BooleanField(default=False)

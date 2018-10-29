@@ -9,7 +9,6 @@ from celery.decorators import task
 
 @task()
 def extract_async(urequest):
-    print("async job started")
     urequest.extract_contents()
 
     

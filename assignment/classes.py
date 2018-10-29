@@ -35,7 +35,8 @@ class UrlExtractor:
                 result_status.append(url)
             print("download completed for", url)
         print("Zip operation")
-        self.zip_files("adnabu_dow/adnabu_{}".format(str(request_id)), "adnabu_dow/{}".format(str(request_id)))
+        self.zip_files("adnabu_dow/adnabu_{}".format(str(request_id)), "adnabu_dow/{}".
+                       format(str(request_id)))
         return result_status
 
     def send_mail_adnabu(self, email_id, file=None, body=""):
