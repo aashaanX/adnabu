@@ -28,7 +28,7 @@ class URequest(models.Model):
         status = uextractor.download_urls(urls, self.id)
         UUrl.objects.filter(urequest=self, url__in=status).update(status=True)
         extracted_urls = UUrl.objects.filter(urequest=self).values_list('url', 'status')
-        body = [(x[0], "Sucess" if x[1] else "Unsucessful") for x in extracted_urls]
+        body = [(x[0], "Downloaded" if x[1] else "Download Failed") for x in extracted_urls]
         uextractor.send_mail_adnabu(self.email_id, "adnabu_dow/adnabu_{}.zip".
                                     format(self.id), str(body))
         self.email_status = True
